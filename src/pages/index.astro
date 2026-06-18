@@ -1,0 +1,614 @@
+---
+import { Image } from "astro:assets";
+import heroImg from "../assets/terraza.jpg";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BBQ La Caseta — Variante A (Cream)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --cream:    #F5EDD8;
+  --cream2:   #EDE0C4;
+  --burgundy: #6B1E1E;
+  --burg-dk:  #4A1010;
+  --gold:     #C8960A;
+  --gold-lt:  #E0AA12;
+  --brown:    #2C1810;
+  --muted:    #7A5A40;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--brown);font-family:'Lora',serif;font-weight:400;line-height:1.7;overflow-x:hidden}
+
+/* dotted-line signature motif, reused everywhere */
+.dotted-rule{
+  flex:1;border-bottom:2px dotted var(--gold);
+  margin:0 0.75rem;transform:translateY(-4px);
+  min-width:24px;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 3.5rem;
+  background:rgba(245,237,216,0.92);backdrop-filter:blur(8px);
+  border-bottom:2px solid var(--gold);
+}
+.nav-logo{display:flex;align-items:center;gap:0.6rem;text-decoration:none}
+.logo-b{
+  font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;
+  color:var(--burgundy);line-height:1;
+}
+.logo-stack{line-height:1.1}
+.logo-name{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--burgundy);letter-spacing:0.05em}
+.logo-sub{font-size:0.58rem;color:var(--gold);letter-spacing:0.18em;text-transform:uppercase}
+.nav-links{display:flex;gap:2.25rem;list-style:none}
+.nav-links a{
+  color:var(--brown);text-decoration:none;font-family:'Inter',sans-serif;
+  font-size:0.74rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--burgundy)}
+
+/* ── HERO ── */
+#inicio{
+  min-height:92vh;display:flex;align-items:center;
+  padding:7rem 3.5rem 3rem;position:relative;overflow:hidden;
+}
+.hero-photo-layer{position:absolute;inset:0;z-index:0}
+.hero-photo-layer .fi-hero,.hero-photo-layer img{
+  position:absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translateX(20%);
+}
+/* the melt: solid cream over the text side, fading to transparent toward the right */
+.hero-fade{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to right,
+    var(--cream) 0%,
+    var(--cream) 38%,
+    rgba(245,237,216,0.75) 52%,
+    rgba(245,237,216,0) 78%
+  );
+}
+.hero-inner{max-width:680px;position:relative;z-index:2}
+.fi-hero{background:radial-gradient(ellipse at 65% 40%,#C8762A 0%,#8B4A18 35%,#4A2810 65%,#1A0E08 100%)}
+.hero-inner{max-width:680px;position:relative;z-index:2}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:0.7rem;
+  font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;
+}
+.hero-eyebrow::before{content:'';width:28px;height:2px;background:var(--gold)}
+
+h1{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(3rem,7vw,5.6rem);line-height:1.0;color:var(--burgundy);
+  margin-bottom:1.4rem;
+}
+h1 em{font-style:italic;color:var(--gold);font-weight:700}
+
+.hero-desc{
+  font-size:1.05rem;color:var(--muted);max-width:420px;margin-bottom:2.2rem;
+}
+
+.btn-primary{
+  display:inline-block;font-family:'Inter',sans-serif;
+  padding:0.9rem 2.1rem;background:var(--burgundy);color:var(--cream);
+  text-decoration:none;font-size:0.76rem;font-weight:600;letter-spacing:0.12em;
+  text-transform:uppercase;border:2px solid var(--burgundy);transition:all 0.2s;
+}
+.btn-primary:hover{background:transparent;color:var(--burgundy)}
+
+/* ── SECTION SHARED ── */
+section{padding:5.5rem 3.5rem}
+.section-head{text-align:center;margin-bottom:3rem}
+.eyebrow-center{
+  display:inline-flex;align-items:center;gap:0.7rem;
+  font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.9rem;
+}
+.eyebrow-center::before,.eyebrow-center::after{content:'';width:24px;height:2px;background:var(--gold)}
+
+h2{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:clamp(2rem,4vw,3rem);color:var(--burgundy);line-height:1.12;
+}
+h2 em{font-style:italic;color:var(--gold);font-weight:600}
+
+/* ── BURGUNDY BAND (alternation for contrast) ── */
+#contacto.band-burgundy{background:var(--burgundy);color:var(--cream)}
+#contacto.band-burgundy h2{color:var(--cream)}
+#contacto.band-burgundy .eyebrow-center{color:var(--gold-lt)}
+#contacto.band-burgundy .eyebrow-center::before,#contacto.band-burgundy .eyebrow-center::after{background:var(--gold-lt)}
+#contacto.band-burgundy .c-label{color:var(--gold-lt)}
+#contacto.band-burgundy .c-value,
+#contacto.band-burgundy .c-value *{color:var(--cream)!important}
+#contacto.band-burgundy .c-value a{border-color:var(--gold-lt)!important}
+#contacto.band-burgundy .c-icon{border-color:var(--gold-lt)}
+
+/* ── HORARIO STRIP ── */
+#horario{
+  background:var(--burgundy);padding:2.6rem 3.5rem;
+  display:flex;justify-content:center;gap:3.5rem;flex-wrap:wrap;
+}
+.h-item{text-align:center;color:var(--cream)}
+.h-label{font-family:'Inter',sans-serif;font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:0.4rem}
+.h-value{font-family:'Playfair Display',serif;font-size:1.1rem}
+
+/* ── CARTA ── */
+#carta{background:var(--cream)}
+.tabs-row{display:flex;justify-content:center;gap:0;margin-bottom:3.5rem;border:2px solid var(--gold);width:fit-content;margin-left:auto;margin-right:auto}
+.tab-btn{
+  font-family:'Inter',sans-serif;padding:0.65rem 1.5rem;font-size:0.72rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;background:transparent;border:none;
+  border-right:1px solid var(--gold);color:var(--muted);cursor:pointer;transition:all 0.2s;
+}
+.tab-btn:last-child{border-right:none}
+.tab-btn.active{background:var(--burgundy);color:var(--cream)}
+.tab-btn:not(.active):hover{background:rgba(200,150,10,0.1);color:var(--burgundy)}
+
+.menu-panel{display:none}
+.menu-panel.active{display:block}
+
+.pinchos-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 3.5rem;max-width:920px;margin:0 auto}
+.m-row{display:flex;align-items:baseline;padding:0.85rem 0}
+.m-name{font-family:'Lora',serif;font-size:0.98rem;white-space:nowrap}
+.m-price{font-family:'Playfair Display',serif;font-weight:700;color:var(--burgundy);white-space:nowrap}
+
+.tapas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.2rem 3rem;max-width:920px;margin:0 auto}
+.t-card{display:grid;grid-template-columns:80px 1fr;gap:1.1rem}
+.t-img{aspect-ratio:1;border:2px solid var(--gold)}
+.t-img div{width:100%;height:100%}
+.t-name{font-family:'Playfair Display',serif;font-weight:700;color:var(--burgundy);margin-bottom:0.15rem}
+.t-price{font-size:0.82rem;color:var(--gold);font-weight:600;margin-bottom:0.4rem}
+.t-desc{font-size:0.82rem;color:var(--muted)}
+
+.fi1{background:radial-gradient(ellipse at 40% 30%,#C8762A,#5C3010 60%,#1A0E08)}
+.fi2{background:radial-gradient(ellipse at 40% 30%,#4A6A1E,#243A0E 60%,#0A1404)}
+.fi3{background:radial-gradient(ellipse at 40% 30%,#8B4A18,#4A2810 60%,#1A0E08)}
+.fi4{background:radial-gradient(ellipse at 40% 30%,#C4A848,#6A5818 60%,#241E08)}
+.fi5{background:radial-gradient(ellipse at 40% 30%,#C4A040,#6A5418 60%,#241E08)}
+.fi6{background:radial-gradient(ellipse at 40% 30%,#7A7A44,#3A3A1E 60%,#141408)}
+.fi7{background:radial-gradient(ellipse at 40% 30%,#7A4E24,#3A2410 60%,#140C04)}
+.fi8{background:radial-gradient(ellipse at 40% 30%,#B86A28,#5C3210 60%,#1C0E04)}
+.fi9{background:radial-gradient(ellipse at 40% 30%,#C4762A,#5C3812 60%,#1C1004)}
+.fi10{background:radial-gradient(ellipse at 40% 30%,#D4B038,#6A5414 60%,#221C04)}
+.fi11{background:radial-gradient(ellipse at 40% 30%,#B89858,#5C4E24 60%,#1E1A0C)}
+.fi12{background:radial-gradient(ellipse at 40% 30%,#C8AC74,#6A5A3A 60%,#241E14)}
+.fi13{background:radial-gradient(ellipse at 40% 30%,#C4502A,#6A2814 60%,#220C04)}
+.fi14{background:radial-gradient(ellipse at 40% 30%,#C4602E,#6A3016 60%,#221004)}
+.fi15{background:radial-gradient(ellipse at 40% 30%,#A89868,#544E34 60%,#1C1A10)}
+.fi16{background:radial-gradient(ellipse at 40% 30%,#A8384A,#5A1C26 60%,#1E0A0E)}
+.fi17{background:radial-gradient(ellipse at 40% 30%,#5E8A2E,#304616 60%,#101C06)}
+.fi18{background:radial-gradient(ellipse at 40% 30%,#D87858,#6E3C2C 60%,#240E08)}
+.fi19{background:radial-gradient(ellipse at 40% 30%,#E08868,#724436 60%,#260E08)}
+.fi20{background:radial-gradient(ellipse at 40% 30%,#C49858,#624C2A 60%,#201A0C)}
+.fi21{background:radial-gradient(ellipse at 40% 30%,#D89868,#6C4C34 60%,#221A10)}
+.fi22{background:radial-gradient(ellipse at 40% 30%,#A85E2C,#562E14 60%,#1C0E04)}
+.fi23{background:radial-gradient(ellipse at 40% 30%,#A87038,#56381C 60%,#1C1006)}
+.fi24{background:radial-gradient(ellipse at 40% 30%,#C8722E,#643A16 60%,#201204)}
+.fi25{background:radial-gradient(ellipse at 40% 30%,#C8841E,#64420E 60%,#201602)}
+
+/* ── GALERÍA ── */
+#galeria{background:var(--cream2)}
+.gallery-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:2rem}
+.g-cell{aspect-ratio:0.9;border:2px solid transparent;overflow:hidden;cursor:pointer;transition:border-color 0.25s}
+.g-cell:hover{border-color:var(--gold)}
+.g-cell div{width:100%;height:100%;transition:transform 0.45s}
+.g-cell:hover div{transform:scale(1.05)}
+.g1{background:radial-gradient(ellipse at 50% 40%,#8B4A18,#3A1E08 60%,#100A04)}
+.g2{background:radial-gradient(ellipse at 50% 40%,#4A5C20,#1E2A0C 60%,#080C04)}
+.g3{background:radial-gradient(ellipse at 50% 40%,#C4822A,#5C3810 60%,#180C04)}
+.g4{background:radial-gradient(ellipse at 50% 40%,#8B6020,#3A2A0C 60%,#100C04)}
+
+/* ── CONTACTO ── */
+#contacto{background:var(--cream)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:980px;margin:0 auto}
+.c-row{display:flex;gap:1.1rem;align-items:flex-start;margin-bottom:1.6rem}
+.c-icon{width:38px;height:38px;min-width:38px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.c-label{font-family:'Inter',sans-serif;font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.3rem}
+.c-value{font-size:0.95rem;color:var(--brown)}
+.horario-status-row{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap}
+.status-dot{
+  width:9px;height:9px;border-radius:50%;background:#3FA34D;
+  flex:none;box-shadow:0 0 0 3px rgba(63,163,77,0.18);
+}
+#contacto.band-burgundy .status-dot{box-shadow:0 0 0 3px rgba(255,255,255,0.12)}
+.status-sep{opacity:0.5}
+.c-value a{color:var(--brown);text-decoration:none;border-bottom:1px solid var(--gold)}
+.map-box{
+  border:2px solid var(--gold);aspect-ratio:4/3;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:0.8rem;background:var(--cream2);
+}
+.map-pin{font-size:2rem}
+.map-link{color:var(--burgundy);text-decoration:none;font-family:'Inter',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;border-bottom:2px solid var(--gold)}
+
+/* ── FOOTER (sketch accent lives here) ── */
+footer{
+  background:var(--burg-dk);color:var(--cream);padding:2.2rem 3.5rem 1.4rem;
+  position:relative;overflow:hidden;
+}
+.footer-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
+.footer-logo{font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem}
+.footer-logo em{font-style:italic;color:var(--gold-lt)}
+footer p{font-family:'Inter',sans-serif;font-size:0.7rem;opacity:0.6}
+.footer-links{display:flex;gap:1.4rem;list-style:none}
+.footer-links a{font-family:'Inter',sans-serif;font-size:0.68rem;color:var(--cream);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;opacity:0.75}
+.footer-sketch{position:absolute;bottom:-10px;right:1rem;width:180px;opacity:0.15;z-index:1}
+
+@media (max-width:900px){
+  nav{padding:0.9rem 1.25rem}.nav-links{display:none}
+  section{padding:3.5rem 1.25rem}
+  #inicio{padding-top:6.5rem}
+  .hero-fade{
+    background:linear-gradient(to bottom,
+      var(--cream) 0%,
+      var(--cream) 42%,
+      rgba(245,237,216,0.7) 58%,
+      rgba(245,237,216,0) 82%
+    );
+  }
+  .pinchos-cols,.tapas-grid{grid-template-columns:1fr}
+  .contact-wrap{grid-template-columns:1fr;gap:2.5rem}
+  .gallery-row{grid-template-columns:1fr 1fr}
+  #horario{gap:1.5rem}
+  .footer-top{flex-direction:column;gap:0.8rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#inicio">
+    <div class="logo-b">B</div>
+    <div class="logo-stack">
+      <div class="logo-name">BQ La Caseta</div>
+      <div class="logo-sub">Bar &amp; Restaurant</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#inicio" data-i18n="nav_inicio">Inicio</a></li>
+    <li><a href="#carta" data-i18n="nav_carta">Carta</a></li>
+    <li><a href="#galeria" data-i18n="nav_galeria">Galería</a></li>
+    <li><a href="#contacto" data-i18n="nav_contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<section id="inicio">
+  <div class="hero-photo-layer">
+    <Image src={heroImg} alt="Terraza de La Caseta" />
+  </div>
+  <div class="hero-fade"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow" data-i18n="hero_eyebrow">Bar &amp; Restaurant · Torredembarra</div>
+    <h1>Ahumado,<br>Carbonizado,<br>y <em>Jugoso</em></h1>
+    <p class="hero-desc" data-i18n="hero_desc">Parrilla de leña, producto fresco y el calor de siempre. Desde el corazón de la Costa Daurada.</p>
+    <a class="btn-primary" href="#carta" data-i18n="hero_cta">Ver la carta</a>
+  </div>
+</section>
+
+<div id="horario">
+  <div class="h-item"><div class="h-label">Lunes a viernes</div><div class="h-value">8:00 – 23:00</div></div>
+  <div class="h-item"><div class="h-label">Fines de semana</div><div class="h-value">8:00 – 00:00</div></div>
+  <div class="h-item"><div class="h-label">Reservas</div><div class="h-value">+34 641 24 57 54</div></div>
+</div>
+
+<section id="carta">
+  <div class="section-head">
+    <div class="eyebrow-center" data-i18n="carta_eyebrow">La carta</div>
+    <h2><span data-i18n="carta_h2_pre">Lo que servimos </span><em data-i18n="carta_h2_em">hoy</em></h2>
+  </div>
+
+  <div class="tabs-row">
+    <button class="tab-btn active" onclick="swap('pinchos',this)" data-i18n="tab_pinchos">Pinchos a la Parrilla</button>
+    <button class="tab-btn" onclick="swap('tapas',this)" data-i18n="tab_tapas">Tapas</button>
+    <button class="tab-btn" onclick="swap('asiaticos',this)" data-i18n="tab_asiaticos">Asiáticos</button>
+  </div>
+
+  <div id="panel-pinchos" class="menu-panel active">
+    <div class="pinchos-cols">
+      <div>
+        <div class="m-row"><span class="m-name">Calçots (temporada)</span><span class="dotted-rule"></span><span class="m-price">9,95 €</span></div>
+        <div class="m-row"><span class="m-name">Mazorca de maíz</span><span class="dotted-rule"></span><span class="m-price">3,00 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de pimientos</span><span class="dotted-rule"></span><span class="m-price">1,50 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de espárragos</span><span class="dotted-rule"></span><span class="m-price">1,50 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de brócoli</span><span class="dotted-rule"></span><span class="m-price">1,50 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de champiñones</span><span class="dotted-rule"></span><span class="m-price">1,50 €</span></div>
+      </div>
+      <div>
+        <div class="m-row"><span class="m-name">Pincho de alitas</span><span class="dotted-rule"></span><span class="m-price">2,50 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de panceta de cerdo</span><span class="dotted-rule"></span><span class="m-price">2,00 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de ternera</span><span class="dotted-rule"></span><span class="m-price">3,00 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de salchicha de cerdo</span><span class="dotted-rule"></span><span class="m-price">2,00 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de salchicha de pollo</span><span class="dotted-rule"></span><span class="m-price">2,00 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de gambas</span><span class="dotted-rule"></span><span class="m-price">4,00 €</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panel-tapas" class="menu-panel">
+    <div class="tapas-grid">
+      <div class="t-card"><div class="t-img"><div class="fi1"></div></div><div><div class="t-name">Patatas Bravas</div><div class="t-price">3,60 €</div><div class="t-desc">Dados de patata dorados y crujientes con salsa brava casera.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi2"></div></div><div><div class="t-name">Pimiento Padrón</div><div class="t-price">3,90 €</div><div class="t-desc">Pimientos verdes salteados con un toque de sal gorda.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi3"></div></div><div><div class="t-name">Pincho Moruno</div><div class="t-price">4,80 €</div><div class="t-desc">Dados de carne adobada con especias tradicionales, a la parrilla.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi4"></div></div><div><div class="t-name">Queso Manchego</div><div class="t-price">4,90 €</div><div class="t-desc">Cuñas de auténtico queso manchego curado.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi5"></div></div><div><div class="t-name">Calamares a la Romana</div><div class="t-price">5,00 €</div><div class="t-desc">Anillas de calamar con rebozado ligero y crujiente.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi6"></div></div><div><div class="t-name">Rollo de la Casa (2u)</div><div class="t-price">5,50 €</div><div class="t-desc">Rollitos crujientes rellenos de verduras, con salsa agridulce.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi7"></div></div><div><div class="t-name">Morros</div><div class="t-price">5,50 €</div><div class="t-desc">Trozos de morro de cerdo fritos, dorado y crujiente.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi8"></div></div><div><div class="t-name">Patas de Calamar</div><div class="t-price">5,80 €</div><div class="t-desc">Rejos de calamar fritos con un toque de limón.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi9"></div></div><div><div class="t-name">Alitas Fritas</div><div class="t-price">5,80 €</div><div class="t-desc">Alitas de pollo doradas y extracrujientes, perfectas para compartir.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi10"></div></div><div><div class="t-name">Pollo Limón</div><div class="t-price">6,50 €</div><div class="t-desc">Jugosos trozos de pollo rebozado bañados en una suave y dulce salsa de limón.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi11"></div></div><div><div class="t-name">Boquerones Fritos</div><div class="t-price">6,80 €</div><div class="t-desc">Boquerones ligeramente enharinados y fritos al estilo tradicional.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi12"></div></div><div><div class="t-name">Choco a la Plancha</div><div class="t-price">9,80 €</div><div class="t-desc">Choco tierno asado a la plancha, aderezado con ajo y perejil.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi13"></div></div><div><div class="t-name">Langostino a la Plancha</div><div class="t-price">9,90 €</div><div class="t-desc">Langostinos enteros asados a la parrilla con un toque de sal marina.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi14"></div></div><div><div class="t-name">Gambas Saladas</div><div class="t-price">10,60 €</div><div class="t-desc">Gambas cocidas en su punto exacto, servidas frías con sal gorda.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi15"></div></div><div><div class="t-name">Sepia a la Plancha</div><div class="t-price">10,80 €</div><div class="t-desc">Dados de sepia tierna a la plancha, con ajo y perejil fresco.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi16"></div></div><div><div class="t-name">Jamón Ibérico</div><div class="t-price">14,50 €</div><div class="t-desc">Finas lonchas de auténtico jamón ibérico, el rey de las tapas.</div></div></div>
+    </div>
+  </div>
+
+  <div id="panel-asiaticos" class="menu-panel">
+    <div class="tapas-grid">
+      <div class="t-card"><div class="t-img"><div class="fi17"></div></div><div><div class="t-name">Edamame</div><div class="t-price">4,80 €</div><div class="t-desc">Vainas de soja tiernas al vapor con un toque de sal marina.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi18"></div></div><div><div class="t-name">Salmón a la Plancha</div><div class="t-price">9,90 €</div><div class="t-desc">Glaseado con salsa teriyaki y servido con un toque de limón fresco.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi19"></div></div><div><div class="t-name">Sashimi de Salmón</div><div class="t-price">12,95 €</div><div class="t-desc">Finas láminas de salmón fresco de primera calidad.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi20"></div></div><div><div class="t-name">Gyozas de Pollo (8u)</div><div class="t-price">6,80 €</div><div class="t-desc">Empanadillas japonesas rellenas de pollo, con salsa de soja tradicional.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi21"></div></div><div><div class="t-name">Torta de Salmón y Aguacate</div><div class="t-price">6,00 €</div><div class="t-desc">Elegante timbal de salmón fresco y aguacate sobre una base de arroz.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi22"></div></div><div><div class="t-name">Ramen</div><div class="t-price">9,00 €</div><div class="t-desc">Caldo japonés servido con fideos udon, ternera tierna y huevo cocido.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi23"></div></div><div><div class="t-name">Arroz Salteado con Pollo</div><div class="t-price">6,90 €</div><div class="t-desc">Arroz frito al wok con tiernos trozos de pollo, huevo y zanahoria.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi24"></div></div><div><div class="t-name">Fideos Salteados con Gambas</div><div class="t-price">7,80 €</div><div class="t-desc">Fideos al wok con gambas, col crujiente y huevo.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi25"></div></div><div><div class="t-name">Pollo con Coco y Curry Rojo</div><div class="t-price">7,20 €</div><div class="t-desc">Tiras de pollo bañadas en una suave salsa de curry rojo y leche de coco.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="galeria">
+  <div class="section-head">
+    <div class="eyebrow-center" data-i18n="galeria_eyebrow">Galería</div>
+    <h2><span data-i18n="galeria_h2_pre">La Caseta en </span><em data-i18n="galeria_h2_em">imágenes</em></h2>
+  </div>
+  <div class="gallery-row">
+    <div class="g-cell"><div class="g1"></div></div>
+    <div class="g-cell"><div class="g2"></div></div>
+    <div class="g-cell"><div class="g3"></div></div>
+    <div class="g-cell"><div class="g4"></div></div>
+  </div>
+</section>
+
+<section id="contacto" class="band-burgundy">
+  <div class="section-head">
+    <div class="eyebrow-center" data-i18n="contacto_eyebrow">Encuéntranos</div>
+    <h2><span data-i18n="contacto_h2_pre">Ven a </span><em data-i18n="contacto_h2_em">vernos</em></h2>
+  </div>
+  <div class="contact-wrap">
+    <div>
+      <div class="c-row"><div class="c-icon">📍</div><div><div class="c-label" data-i18n="lbl_direccion">Dirección</div><div class="c-value">Av. de Catalunya, 27–29<br>Torredembarra, Tarragona</div></div></div>
+      <div class="c-row">
+        <div class="c-icon">🕐</div>
+        <div>
+          <div class="c-label" data-i18n="lbl_horario">Horario</div>
+          <div class="c-value horario-status-row">
+            <span class="status-dot" id="horario-dot"></span>
+            <span id="horario-status-text">Abierto</span>
+            <span class="status-sep">·</span>
+            <span id="horario-hours-text">8:00 – 23:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="c-row"><div class="c-icon">📞</div><div><div class="c-label" data-i18n="lbl_telefono">Teléfono</div><div class="c-value"><a href="tel:+34641245754">+34 641 24 57 54</a></div></div></div>
+      <div class="c-row"><div class="c-icon">📰</div><div><div class="c-label" data-i18n="lbl_news">Novedades</div><div class="c-value" id="news-text">Nada nuevo por ahora...</div></div></div>
+    </div>
+    <div class="map-box">
+      <div class="map-pin">📍</div>
+      <a class="map-link" href="https://maps.app.goo.gl/AZF8kG78FSK9gqMe6" target="_blank" data-i18n="maps_link">Abrir en Google Maps →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">BQ <em>La Caseta</em></div>
+    <p data-i18n="footer_copy">© 2026 BBQ La Caseta · Torredembarra</p>
+    <ul class="footer-links"><li><a href="#inicio" data-i18n="nav_inicio">Inicio</a></li><li><a href="#carta" data-i18n="nav_carta">Carta</a></li></ul>
+  </div>
+  <svg class="footer-sketch" viewBox="0 0 200 100" fill="none" stroke="#C8960A" stroke-width="2">
+    <line x1="20" y1="60" x2="180" y2="60"/>
+    <line x1="40" y1="60" x2="40" y2="20"/><line x1="60" y1="60" x2="60" y2="15"/>
+    <line x1="100" y1="60" x2="100" y2="25"/><line x1="140" y1="60" x2="140" y2="18"/>
+  </svg>
+</footer>
+
+<script is:inline>
+/* ════════════════════════════════════════════════════════
+   EDITABLE CONFIG — change things here, nowhere else needed
+   ════════════════════════════════════════════════════════ */
+
+// Regular weekly hours. 0 = Sunday, 1 = Monday, ... 6 = Saturday
+const REGULAR_HOURS = {
+  weekday: { open: '8:00', close: '23:00' },   // Mon–Fri
+  weekend: { open: '8:00', close: '00:00' }    // Sat–Sun
+};
+function isWeekendDay(jsDay){ return jsDay === 0 || jsDay === 6; }
+
+// Special days override the regular schedule AND can carry a news message.
+// Add one entry per special date. Date format: 'YYYY-MM-DD'.
+// Leave "hours" as null for a day that's simply closed.
+const SPECIAL_DAYS = {
+  // Example — delete or edit freely:
+  // '2026-06-23': {
+  //   hours: null,
+  //   news: { es:'Cerrado por Sant Joan.', ca:'Tancat per Sant Joan.', en:'Closed for Sant Joan.' }
+  // },
+  // '2026-12-25': {
+  //   hours: { open:'13:00', close:'17:00' },
+  //   news: { es:'Horario especial de Navidad.', ca:'Horari especial de Nadal.', en:'Special Christmas hours.' }
+  // },
+};
+
+// Default news text shown when there is no special day today.
+// Edit the three lines below any time — they're just plain text.
+const DEFAULT_NEWS = {
+  es: 'Nada nuevo por ahora...',
+  ca: 'Res de nou per ara...',
+  en: 'Nothing new for now...'
+};
+
+/* ════════════════════════════════════════════════════════
+   TRANSLATIONS — structural site text only (not dish data)
+   ════════════════════════════════════════════════════════ */
+const I18N = {
+  es: {
+    nav_inicio:'Inicio', nav_carta:'Carta', nav_galeria:'Galería', nav_contacto:'Contacto',
+    hero_eyebrow:'Bar & Restaurant · Torredembarra',
+    hero_desc:'Alquila nuestra parrilla por 18€ la hora, con capacidad de hasta 6 personas. Adecuado para compleaños, celebracios, y más.',
+    hero_cta:'Ver la carta',
+    carta_eyebrow:'La carta', carta_h2_pre:'Lo que servimos ', carta_h2_em:'hoy',
+    tab_pinchos:'Pinchos a la Parrilla', tab_tapas:'Tapas', tab_asiaticos:'Asiáticos',
+    galeria_eyebrow:'Galería', galeria_h2_pre:'La Caseta en ', galeria_h2_em:'imágenes',
+    contacto_eyebrow:'Encuéntranos', contacto_h2_pre:'Ven a ', contacto_h2_em:'vernos',
+    lbl_direccion:'Dirección', lbl_horario:'Horario', lbl_telefono:'Teléfono', lbl_news:'Novedades',
+    status_open:'Abierto', status_closed:'Cerrado',
+    maps_link:'Abrir en Google Maps →',
+    footer_copy:'© 2026 BBQ La Caseta · Torredembarra'
+  },
+  ca: {
+    nav_inicio:'Inici', nav_carta:'Carta', nav_galeria:'Galeria', nav_contacto:'Contacte',
+    hero_eyebrow:'Bar & Restaurant · Torredembarra',
+    hero_desc:'Llogueu la nostra graella per 18€ l\'hora, amb capacitat de fins a 6 persones. Adequat per a companys, celebracions, i més.',
+    hero_cta:'Veure la carta',
+    carta_eyebrow:'La carta', carta_h2_pre:'El que servim ', carta_h2_em:'avui',
+    tab_pinchos:'Pinxos a la Graella', tab_tapas:'Tapes', tab_asiaticos:'Asiàtics',
+    galeria_eyebrow:'Galeria', galeria_h2_pre:'La Caseta en ', galeria_h2_em:'imatges',
+    contacto_eyebrow:'Troba\u2019ns', contacto_h2_pre:'Vine a ', contacto_h2_em:'veure\u2019ns',
+    lbl_direccion:'Adreça', lbl_horario:'Horari', lbl_telefono:'Telèfon', lbl_news:'Novetats',
+    status_open:'Obert', status_closed:'Tancat',
+    maps_link:'Obrir a Google Maps →',
+    footer_copy:'© 2026 BBQ La Caseta · Torredembarra'
+  },
+  en: {
+    nav_inicio:'Home', nav_carta:'Menu', nav_galeria:'Gallery', nav_contacto:'Contact',
+    hero_eyebrow:'Bar & Restaurant · Torredembarra',
+    hero_desc:'Rent our grill for €18 per hour, with capacity for up to 6 people. Suitable for birthdays, celebrations, and more.',
+    hero_cta:'View the menu',
+    carta_eyebrow:'The menu', carta_h2_pre:'What we\u2019re serving ', carta_h2_em:'today',
+    tab_pinchos:'Grilled Skewers', tab_tapas:'Tapas', tab_asiaticos:'Asian',
+    galeria_eyebrow:'Gallery', galeria_h2_pre:'La Caseta in ', galeria_h2_em:'pictures',
+    contacto_eyebrow:'Find us', contacto_h2_pre:'Come ', contacto_h2_em:'visit',
+    lbl_direccion:'Address', lbl_horario:'Hours', lbl_telefono:'Phone', lbl_news:'News',
+    status_open:'Open', status_closed:'Closed',
+    maps_link:'Open in Google Maps →',
+    footer_copy:'© 2026 BBQ La Caseta · Torredembarra'
+  }
+};
+
+function detectLang(){
+  const supported = ['es','ca','en'];
+  const langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'es'];
+  for (const l of langs){
+    const code = l.toLowerCase().slice(0,2);
+    if (supported.includes(code)) return code;
+  }
+  return 'es'; // default, per requirement
+}
+
+function applyTranslations(lang){
+  const dict = I18N[lang] || I18N.es;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+  document.documentElement.lang = lang;
+}
+
+function pad(n){ return n.toString().padStart(2,'0'); }
+function todayKey(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+
+function getTodaysScheduleAndNews(lang){
+  const now = new Date();
+  const key = todayKey(now);
+  const special = SPECIAL_DAYS[key];
+
+  let hours;
+  if (special && special.hours !== undefined){
+    hours = special.hours; // may be null = closed
+  } else {
+    hours = isWeekendDay(now.getDay()) ? REGULAR_HOURS.weekend : REGULAR_HOURS.weekday;
+  }
+
+  let news;
+  if (special && special.news){
+    news = special.news[lang] || special.news.es;
+  } else {
+    news = DEFAULT_NEWS[lang] || DEFAULT_NEWS.es;
+  }
+
+  // Open/closed check only valid for same-day open/close (handles 00:00 as midnight)
+  let isOpenNow = false;
+  if (hours){
+    const [oh,om] = hours.open.split(':').map(Number);
+    let [ch,cm] = hours.close.split(':').map(Number);
+    if (ch === 0 && cm === 0){ ch = 24; } // treat 00:00 close as midnight end-of-day
+    const nowMinutes = now.getHours()*60 + now.getMinutes();
+    const openMinutes = oh*60+om;
+    const closeMinutes = ch*60+cm;
+    isOpenNow = nowMinutes >= openMinutes && nowMinutes < closeMinutes;
+  }
+
+  return { hours, news, isOpenNow };
+}
+
+function renderHorarioAndNews(lang){
+  const dict = I18N[lang] || I18N.es;
+  const { hours, news, isOpenNow } = getTodaysScheduleAndNews(lang);
+
+  const hoursText = hours ? `${hours.open} – ${hours.close}` : dict.status_closed;
+  const statusText = hours ? (isOpenNow ? dict.status_open : dict.status_closed) : dict.status_closed;
+  const dotColor = isOpenNow ? '#3FA34D' : '#A33F3F';
+
+  // Top strip (single combined schedule now, no separate weekday/weekend columns)
+  const stripEl = document.getElementById('horario-strip-value');
+  if (stripEl) stripEl.textContent = hoursText;
+
+  // "Find us" Horario row — status dot + text
+  const dot = document.getElementById('horario-dot');
+  const statusEl = document.getElementById('horario-status-text');
+  const hoursEl = document.getElementById('horario-hours-text');
+  if (dot) dot.style.background = dotColor;
+  if (statusEl) statusEl.textContent = statusText;
+  if (hoursEl) hoursEl.textContent = hoursText;
+
+  // News box
+  const newsEl = document.getElementById('news-text');
+  if (newsEl) newsEl.textContent = news;
+}
+
+function initSite(){
+  const lang = detectLang();
+  applyTranslations(lang);
+  renderHorarioAndNews(lang);
+}
+document.addEventListener('DOMContentLoaded', initSite);
+
+function swap(id,btn){
+  document.querySelectorAll('.menu-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

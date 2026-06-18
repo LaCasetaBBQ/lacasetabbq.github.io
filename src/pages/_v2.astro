@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BBQ La Caseta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:        #0E0E0E;
+  --bg2:       #161616;
+  --bg3:       #1C1C1C;
+  --line:      rgba(255,255,255,0.08);
+  --text:      #F2F0EB;
+  --muted:     #8A8780;
+  --amber:     #D99A2B;
+  --amber-dim: rgba(217,154,43,0.12);
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden}
+
+/* ─ NAV ─ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.6rem 4rem;
+  background:linear-gradient(to bottom, rgba(14,14,14,0.9), transparent);
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:500;font-style:italic;
+  color:var(--text);text-decoration:none;letter-spacing:0.01em;
+}
+.nav-links{display:flex;gap:2.75rem;list-style:none}
+.nav-links a{
+  color:rgba(242,240,235,0.55);text-decoration:none;
+  font-size:0.74rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{
+  font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--bg);background:var(--amber);
+  padding:0.65rem 1.5rem;text-decoration:none;
+  transition:opacity 0.2s;
+}
+.nav-cta:hover{opacity:0.85}
+
+/* ─ HERO ─ */
+#inicio{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;
+  position:relative;
+}
+.hero-left{padding:0 4rem 0 4rem;position:relative;z-index:2}
+
+.hero-tag{
+  display:flex;align-items:center;gap:0.85rem;
+  font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:1.75rem;
+}
+.hero-tag::before{content:'';width:30px;height:1px;background:var(--amber)}
+
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.4rem,6.5vw,5.8rem);
+  font-weight:500;line-height:1.02;letter-spacing:-0.01em;
+  margin-bottom:1.5rem;
+}
+h1 em{font-style:italic;color:var(--amber);font-weight:400}
+
+.hero-desc{
+  font-size:1rem;color:var(--muted);max-width:380px;
+  margin-bottom:2.5rem;line-height:1.85;font-weight:300;
+}
+
+.hero-actions{display:flex;align-items:center;gap:1.75rem}
+.btn-primary{
+  display:inline-block;padding:0.95rem 2.2rem;
+  background:var(--amber);color:var(--bg);text-decoration:none;
+  font-size:0.74rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;
+  transition:opacity 0.2s;
+}
+.btn-primary:hover{opacity:0.85}
+
+.btn-ghost{
+  display:flex;align-items:center;gap:0.75rem;
+  color:var(--text);text-decoration:none;
+  font-size:0.74rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+}
+.play-circle{
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid rgba(242,240,235,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.7rem;transition:border-color 0.2s;
+}
+.btn-ghost:hover .play-circle{border-color:var(--amber);color:var(--amber)}
+
+.hero-socials{
+  display:flex;gap:1.25rem;margin-top:4rem;
+}
+.hero-socials a{
+  width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(242,240,235,0.15);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(242,240,235,0.6);text-decoration:none;font-size:0.85rem;
+  transition:all 0.2s;
+}
+.hero-socials a:hover{border-color:var(--amber);color:var(--amber)}
+
+/* Hero food image side */
+.hero-right{position:relative;height:100vh;display:flex;align-items:center;justify-content:center}
+
+.plate-frame{
+  width:90%;aspect-ratio:1.3/1;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+
+.plate-img{
+  width:100%;height:100%;border-radius:50%;
+  background:
+    radial-gradient(ellipse at 35% 30%, #C8762A 0%, #8B4A18 30%, #4A2810 55%, #1A0E08 80%),
+    radial-gradient(ellipse at 65% 70%, #A85A20 0%, transparent 50%);
+  box-shadow:0 40px 80px -20px rgba(0,0,0,0.6);
+  position:relative;
+  overflow:hidden;
+}
+
+.plate-img::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(115deg, transparent 0px, transparent 18px, rgba(0,0,0,0.08) 18px, rgba(0,0,0,0.08) 20px);
+}
+
+.hero-order-tag{
+  position:absolute;
+  bottom:8%;left:6%;
+  display:flex;align-items:center;gap:0.75rem;
+  z-index:3;
+}
+.hero-order-tag span{
+  font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--amber);
+}
+.hero-order-tag .arrow{color:var(--amber);font-size:1rem}
+
+.hero-photo-note{
+  position:absolute;top:6%;right:6%;
+  background:rgba(14,14,14,0.7);border:1px solid var(--line);
+  padding:0.6rem 1rem;font-size:0.68rem;color:var(--muted);
+  letter-spacing:0.05em;backdrop-filter:blur(4px);
+}
+
+.hero-scroll{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  color:rgba(242,240,235,0.4);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;
+}
+.hero-scroll-line{width:1px;height:36px;background:linear-gradient(to bottom, var(--amber), transparent)}
+
+/* ─ SECTION BASE ─ */
+section{padding:7rem 4rem}
+.eyebrow{
+  display:flex;align-items:center;gap:0.85rem;
+  font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:1.1rem;
+}
+.eyebrow::before{content:'';width:30px;height:1px;background:var(--amber)}
+
+h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,4.5vw,3.6rem);
+  font-weight:500;line-height:1.1;letter-spacing:-0.005em;
+}
+h2 em{font-style:italic;color:var(--amber);font-weight:400}
+
+/* ─ HORARIO STRIP ─ */
+#horario{
+  background:var(--bg2);
+  padding:3rem 4rem;
+  display:flex;align-items:center;justify-content:center;gap:4rem;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.horario-item{text-align:center}
+.horario-label{
+  font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:0.5rem;
+}
+.horario-value{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;color:var(--text);font-weight:400;
+}
+.horario-div{width:1px;height:40px;background:var(--line)}
+
+/* ─ CARTA ─ */
+#carta{background:var(--bg)}
+
+.menu-tabs-row{
+  display:flex;justify-content:center;gap:0.5rem;margin-bottom:4rem;
+}
+.mtab{
+  padding:0.7rem 1.75rem;
+  font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+  background:transparent;border:1px solid var(--line);color:var(--muted);
+  cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;
+}
+.mtab.active{border-color:var(--amber);color:var(--amber);background:var(--amber-dim)}
+.mtab:not(.active):hover{border-color:rgba(242,240,235,0.25);color:var(--text)}
+
+.menu-panel{display:none;opacity:1!important;transform:none!important}
+.menu-panel.active{display:block}
+
+.pinchos-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:0 4rem;
+  max-width:1000px;margin:0 auto;
+}
+.menu-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:1.1rem 0;border-bottom:1px solid var(--line);gap:1rem;
+}
+.menu-row .m-name{
+  font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text);font-weight:400;
+}
+.m-right{display:flex;align-items:center;gap:0.6rem}
+.allergy-icons{display:flex;gap:0.35rem}
+.allergy-icon{
+  position:relative;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--bg3);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.62rem;color:var(--muted);
+  cursor:default;transition:border-color 0.2s,color 0.2s;
+}
+.allergy-icon:hover{border-color:var(--amber);color:var(--amber)}
+.allergy-icon .tooltip{
+  position:absolute;bottom:130%;left:50%;transform:translateX(-50%) translateY(4px);
+  background:var(--bg2);border:1px solid var(--line);
+  padding:0.4rem 0.7rem;border-radius:4px;
+  font-size:0.68rem;color:var(--text);white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity 0.18s,transform 0.18s;
+  z-index:10;font-family:'Inter',sans-serif;letter-spacing:0;text-transform:none;
+}
+.allergy-icon .tooltip::after{
+  content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  border:5px solid transparent;border-top-color:var(--line);
+}
+.allergy-icon:hover .tooltip{opacity:1;transform:translateX(-50%) translateY(0)}
+.menu-row .m-price{
+  font-size:0.85rem;color:var(--amber);font-weight:500;white-space:nowrap;
+}
+
+.tapas-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem 3rem;
+  max-width:1000px;margin:0 auto;
+}
+.tapa-card{display:grid;grid-template-columns:84px 1fr;gap:1.25rem}
+.tapa-img{aspect-ratio:1;overflow:hidden}
+.tapa-img div{width:100%;height:100%}
+
+.fi-bravas{background:radial-gradient(ellipse at 40% 30%,#C8762A 0%,#5C3010 60%,#1A0E08 100%)}
+.fi-padron{background:radial-gradient(ellipse at 40% 30%,#4A6A1E 0%,#243A0E 60%,#0A1404 100%)}
+.fi-moruno{background:radial-gradient(ellipse at 40% 30%,#8B4A18 0%,#4A2810 60%,#1A0E08 100%)}
+.fi-manchego{background:radial-gradient(ellipse at 40% 30%,#C4A848 0%,#6A5818 60%,#241E08 100%)}
+.fi-calamares{background:radial-gradient(ellipse at 40% 30%,#C4A040 0%,#6A5418 60%,#241E08 100%)}
+.fi-rollo{background:radial-gradient(ellipse at 40% 30%,#7A7A44 0%,#3A3A1E 60%,#141408 100%)}
+.fi-morros{background:radial-gradient(ellipse at 40% 30%,#7A4E24 0%,#3A2410 60%,#140C04 100%)}
+.fi-patas{background:radial-gradient(ellipse at 40% 30%,#B86A28 0%,#5C3210 60%,#1C0E04 100%)}
+.fi-alitas{background:radial-gradient(ellipse at 40% 30%,#C4762A 0%,#5C3812 60%,#1C1004 100%)}
+.fi-pollolimon{background:radial-gradient(ellipse at 40% 30%,#D4B038 0%,#6A5414 60%,#221C04 100%)}
+.fi-boquerones{background:radial-gradient(ellipse at 40% 30%,#B89858 0%,#5C4E24 60%,#1E1A0C 100%)}
+.fi-choco{background:radial-gradient(ellipse at 40% 30%,#C8AC74 0%,#6A5A3A 60%,#241E14 100%)}
+.fi-langostino{background:radial-gradient(ellipse at 40% 30%,#C4502A 0%,#6A2814 60%,#220C04 100%)}
+.fi-gambas-saladas{background:radial-gradient(ellipse at 40% 30%,#C4602E 0%,#6A3016 60%,#221004 100%)}
+.fi-sepia{background:radial-gradient(ellipse at 40% 30%,#A89868 0%,#544E34 60%,#1C1A10 100%)}
+.fi-jamon{background:radial-gradient(ellipse at 40% 30%,#A8384A 0%,#5A1C26 60%,#1E0A0E 100%)}
+.fi-edamame{background:radial-gradient(ellipse at 40% 30%,#5E8A2E 0%,#304616 60%,#101C06 100%)}
+.fi-salmon-plancha{background:radial-gradient(ellipse at 40% 30%,#D87858 0%,#6E3C2C 60%,#240E08 100%)}
+.fi-sashimi{background:radial-gradient(ellipse at 40% 30%,#E08868 0%,#724436 60%,#260E08 100%)}
+.fi-gyozas{background:radial-gradient(ellipse at 40% 30%,#C49858 0%,#624C2A 60%,#201A0C 100%)}
+.fi-torta-salmon{background:radial-gradient(ellipse at 40% 30%,#D89868 0%,#6C4C34 60%,#221A10 100%)}
+.fi-ramen{background:radial-gradient(ellipse at 40% 30%,#A85E2C 0%,#562E14 60%,#1C0E04 100%)}
+.fi-arroz-pollo{background:radial-gradient(ellipse at 40% 30%,#A87038 0%,#56381C 60%,#1C1006 100%)}
+.fi-fideos-gambas{background:radial-gradient(ellipse at 40% 30%,#C8722E 0%,#643A16 60%,#201204 100%)}
+.fi-pollo-curry{background:radial-gradient(ellipse at 40% 30%,#C8841E 0%,#64420E 60%,#201602 100%)}
+
+.tapa-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);margin-bottom:0.2rem}
+.tapa-price-row{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.5rem}
+.tapa-price{font-size:0.8rem;color:var(--amber);font-weight:500}
+.tapa-desc{font-size:0.82rem;color:var(--muted);line-height:1.6}
+
+/* ─ GALERÍA ─ */
+#galeria{background:var(--bg2);padding-bottom:5rem}
+.gallery-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:3rem;
+}
+.gallery-cell{aspect-ratio:0.85;overflow:hidden;position:relative;cursor:pointer}
+.gallery-cell div{width:100%;height:100%;transition:transform 0.5s ease}
+.gallery-cell:hover div{transform:scale(1.05)}
+.g1{background:radial-gradient(ellipse at 50% 40%,#8B4A18 0%,#3A1E08 60%,#100A04 100%)}
+.g2{background:radial-gradient(ellipse at 50% 40%,#4A5C20 0%,#1E2A0C 60%,#080C04 100%)}
+.g3{background:radial-gradient(ellipse at 50% 40%,#C4822A 0%,#5C3810 60%,#180C04 100%)}
+.g4{background:radial-gradient(ellipse at 50% 40%,#8B6020 0%,#3A2A0C 60%,#100C04 100%)}
+
+/* ─ CONTACTO ─ */
+#contacto{background:var(--bg);border-top:1px solid var(--line)}
+.contact-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;max-width:1100px;margin:0 auto;
+}
+.contact-rows{display:flex;flex-direction:column;gap:2rem}
+.c-row{display:flex;gap:1.25rem;align-items:flex-start}
+.c-icon{
+  width:40px;height:40px;min-width:40px;
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+  font-size:1rem;margin-top:2px;
+}
+.c-label{font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber);margin-bottom:0.35rem}
+.c-value{font-size:0.92rem;color:var(--text);line-height:1.7;font-weight:300}
+.c-value a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--line)}
+.c-value a:hover{border-color:var(--amber)}
+
+.map-box{
+  aspect-ratio:4/3;border:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
+  position:relative;overflow:hidden;background:var(--bg3);
+}
+.map-box::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(217,154,43,0.04) 38px,rgba(217,154,43,0.04) 39px),
+    repeating-linear-gradient(90deg,transparent,transparent 38px,rgba(217,154,43,0.04) 38px,rgba(217,154,43,0.04) 39px);
+}
+.map-pin{font-size:2.2rem;position:relative;z-index:1}
+.map-address{font-size:0.85rem;color:var(--muted);text-align:center;position:relative;z-index:1;line-height:1.6}
+.map-link{
+  position:relative;z-index:1;color:var(--amber);text-decoration:none;
+  font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;
+  border-bottom:1px solid var(--amber);padding-bottom:2px;
+}
+
+/* ─ FOOTER ─ */
+footer{
+  border-top:1px solid var(--line);padding:2.5rem 4rem;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--text)}
+footer p{font-size:0.72rem;color:var(--muted)}
+.footer-links{display:flex;gap:1.75rem;list-style:none}
+.footer-links a{font-size:0.7rem;color:var(--muted);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.footer-links a:hover{color:var(--amber)}
+
+/* ─ REVEAL ─ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ─ RESPONSIVE ─ */
+@media (max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  #inicio{grid-template-columns:1fr;min-height:auto;padding:7rem 0 3rem}
+  .hero-left{padding:0 1.5rem;margin-bottom:3rem}
+  .hero-right{height:60vw;min-height:280px}
+  section{padding:4rem 1.5rem}
+  #horario{flex-direction:column;gap:1.5rem;padding:2.5rem 1.5rem}
+  .horario-div{display:none}
+  .pinchos-grid,.tapas-grid{grid-template-columns:1fr}
+  .contact-wrap{grid-template-columns:1fr;gap:3rem}
+  .gallery-row{grid-template-columns:1fr 1fr}
+  footer{flex-direction:column;gap:1rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#inicio">La Caseta</a>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a class="nav-cta" href="tel:+34641245754" style="display:none">Reservar</a>
+</nav>
+
+<section id="inicio">
+  <div class="hero-left">
+    <div class="hero-tag">BBQ &amp; Parrilla · Torredembarra</div>
+    <h1>Fuego y<br><em>sabor</em><br>de verdad</h1>
+    <p class="hero-desc">Parrilla de leña, producto fresco y el calor de siempre, en el corazón de la Costa Daurada.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#carta">Ver la carta</a>
+    </div>
+    <div class="hero-socials">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Instagram">ig</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="plate-frame">
+      <div class="plate-img"></div>
+      <div class="hero-photo-note">Sustituye por tu foto real</div>
+      <div class="hero-order-tag">
+        <span>Pedir Online</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<div id="horario">
+  <div class="horario-item">
+    <div class="horario-label">Lunes a viernes</div>
+    <div class="horario-value">19:00 – 22:30</div>
+  </div>
+  <div class="horario-div"></div>
+  <div class="horario-item">
+    <div class="horario-label">Fines de semana y festivos</div>
+    <div class="horario-value">12:00–16:00 · 19:00–23:00</div>
+  </div>
+  <div class="horario-div"></div>
+  <div class="horario-item">
+    <div class="horario-label">Reservas</div>
+    <div class="horario-value">+34 641 24 57 54</div>
+  </div>
+</div>
+
+<section id="carta">
+  <div style="text-align:center;margin-bottom:3.5rem" class="reveal">
+    <div class="eyebrow" style="justify-content:center">La carta</div>
+    <h2>Lo que servimos <em>hoy</em></h2>
+  </div>
+
+  <div class="menu-tabs-row reveal">
+    <button class="mtab active" onclick="swap('pinchos',this)">Pinchos a la parrilla</button>
+    <button class="mtab" onclick="swap('tapas',this)">Tapas</button>
+    <button class="mtab" onclick="swap('asiaticos',this)">Asiáticos</button>
+  </div>
+
+  <div id="panel-pinchos" class="menu-panel active reveal">
+    <div class="pinchos-grid">
+      <div>
+        <div class="menu-row"><span class="m-name">Calçots (temporada)</span><span class="m-right"><span class="allergy-icons"><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></span><span class="m-price">9,95 €</span></span></div>
+        <div class="menu-row"><span class="m-name">Mazorca de maíz</span><span class="m-right"><span class="allergy-icons"><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></span><span class="m-price">3,00 €</span></span></div>
+        <div class="menu-row"><span class="m-name">Pincho de pimientos</span><span class="m-right"><span class="allergy-icons"><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></span><span class="m-price">1,50 €</span></span></div>
+        <div class="menu-row"><span class="m-name">Pincho de espárragos</span><span class="m-right"><span class="allergy-icons"><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></span><span class="m-price">1,50 €</span></span></div>
+        <div class="menu-row"><span class="m-name">Pincho de brócoli</span><span class="m-right"><span class="allergy-icons"><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></span><span class="m-price">1,50 €</span></span></div>
+        <div class="menu-row"><span class="m-name">Pincho de champiñones</span><span class="m-right"><span class="allergy-icons"><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></span><span class="m-price">1,50 €</span></span></div>
+      </div>
+      <div>
+        <div class="menu-row"><span class="m-name">Pincho de alitas</span><span class="m-right"><span class="allergy-icons"><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></span><span class="m-price">2,50 €</span></span></div>
+        <div class="menu-row"><span class="m-name">Pincho de panceta de cerdo</span><span class="m-right"><span class="allergy-icons"><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></span><span class="m-price">2,00 €</span></span></div>
+        <div class="menu-row"><span class="m-name">Pincho de ternera</span><span class="m-right"><span class="allergy-icons"><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></span><span class="m-price">3,00 €</span></span></div>
+        <div class="menu-row"><span class="m-name">Pincho de salchicha de cerdo</span><span class="m-right"><span class="allergy-icons"><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></span><span class="m-price">2,00 €</span></span></div>
+        <div class="menu-row"><span class="m-name">Pincho de salchicha de pollo</span><span class="m-right"><span class="allergy-icons"><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></span><span class="m-price">2,00 €</span></span></div>
+        <div class="menu-row"><span class="m-name">Pincho de gambas</span><span class="m-right"><span class="allergy-icons"><span class="allergy-icon">M<span class="tooltip">Contiene marisco</span></span></span><span class="m-price">4,00 €</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panel-tapas" class="menu-panel reveal">
+    <div class="tapas-grid">
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-bravas"></div></div>
+        <div><div class="tapa-name">Patatas bravas</div><div class="tapa-price-row"><span class="tapa-price">3,60 €</span><span class="allergy-icon">L<span class="tooltip">Contiene lácteos (alioli)</span></span></div><div class="tapa-desc">Dados de patata dorados y crujientes, bañados en salsa brava casera.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-padron"></div></div>
+        <div><div class="tapa-name">Pimiento Padrón</div><div class="tapa-price-row"><span class="tapa-price">3,90 €</span><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></div><div class="tapa-desc">Pimientos verdes salteados con un toque de sal gorda.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-moruno"></div></div>
+        <div><div class="tapa-name">Pincho Moruno</div><div class="tapa-price-row"><span class="tapa-price">4,80 €</span><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></div><div class="tapa-desc">Dados de carne adobada con especias tradicionales, a la parrilla.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-manchego"></div></div>
+        <div><div class="tapa-name">Queso manchego</div><div class="tapa-price-row"><span class="tapa-price">4,90 €</span><span class="allergy-icon">L<span class="tooltip">Contiene lácteos</span></span></div><div class="tapa-desc">Cuñas de auténtico queso manchego curado.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-calamares"></div></div>
+        <div><div class="tapa-name">Calamares a la romana</div><div class="tapa-price-row"><span class="tapa-price">5,00 €</span><span class="allergy-icon">M<span class="tooltip">Contiene marisco y gluten</span></span></div><div class="tapa-desc">Anillas de calamar con rebozado ligero y crujiente.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-rollo"></div></div>
+        <div><div class="tapa-name">Rollo de la casa (2u)</div><div class="tapa-price-row"><span class="tapa-price">5,50 €</span><span class="allergy-icon">G<span class="tooltip">Contiene gluten</span></span></div><div class="tapa-desc">Rollitos crujientes rellenos de verduras, con salsa agridulce.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-morros"></div></div>
+        <div><div class="tapa-name">Morros</div><div class="tapa-price-row"><span class="tapa-price">5,50 €</span><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></div><div class="tapa-desc">Trozos de morro de cerdo fritos, dorado y crujiente.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-patas"></div></div>
+        <div><div class="tapa-name">Patas de calamar</div><div class="tapa-price-row"><span class="tapa-price">5,80 €</span><span class="allergy-icon">M<span class="tooltip">Contiene marisco</span></span></div><div class="tapa-desc">Rejos de calamar fritos con un toque de limón.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-alitas"></div></div>
+        <div><div class="tapa-name">Alitas fritas</div><div class="tapa-price-row"><span class="tapa-price">5,80 €</span><span class="allergy-icon">G<span class="tooltip">Contiene gluten</span></span></div><div class="tapa-desc">Alitas de pollo doradas y extracrujientes, perfectas para compartir.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-pollolimon"></div></div>
+        <div><div class="tapa-name">Pollo limón</div><div class="tapa-price-row"><span class="tapa-price">6,50 €</span><span class="allergy-icon">G<span class="tooltip">Contiene gluten</span></span></div><div class="tapa-desc">Jugosos trozos de pollo rebozado bañados en una suave y dulce salsa de limón.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-boquerones"></div></div>
+        <div><div class="tapa-name">Boquerones fritos</div><div class="tapa-price-row"><span class="tapa-price">6,80 €</span><span class="allergy-icon">M<span class="tooltip">Contiene pescado y gluten</span></span></div><div class="tapa-desc">Boquerones ligeramente enharinados y fritos al estilo tradicional.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-choco"></div></div>
+        <div><div class="tapa-name">Choco a la plancha</div><div class="tapa-price-row"><span class="tapa-price">9,80 €</span><span class="allergy-icon">M<span class="tooltip">Contiene marisco</span></span></div><div class="tapa-desc">Choco tierno asado a la plancha, aderezado con un majado de ajo y perejil.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-langostino"></div></div>
+        <div><div class="tapa-name">Langostino a la plancha</div><div class="tapa-price-row"><span class="tapa-price">9,90 €</span><span class="allergy-icon">M<span class="tooltip">Contiene marisco</span></span></div><div class="tapa-desc">Langostinos enteros asados a la parrilla con un toque de sal marina.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-gambas-saladas"></div></div>
+        <div><div class="tapa-name">Gambas saladas</div><div class="tapa-price-row"><span class="tapa-price">10,60 €</span><span class="allergy-icon">M<span class="tooltip">Contiene marisco</span></span></div><div class="tapa-desc">Gambas cocidas en su punto exacto, servidas frías con sal gorda.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-sepia"></div></div>
+        <div><div class="tapa-name">Sepia a la plancha</div><div class="tapa-price-row"><span class="tapa-price">10,80 €</span><span class="allergy-icon">M<span class="tooltip">Contiene marisco</span></span></div><div class="tapa-desc">Dados de sepia tierna a la plancha, acompañados de ajo y perejil fresco.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-jamon"></div></div>
+        <div><div class="tapa-name">Jamón ibérico</div><div class="tapa-price-row"><span class="tapa-price">14,50 €</span><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></div><div class="tapa-desc">Finas lonchas de auténtico jamón ibérico, el rey indiscutible de las tapas.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panel-asiaticos" class="menu-panel reveal">
+    <div class="tapas-grid">
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-edamame"></div></div>
+        <div><div class="tapa-name">Edamame</div><div class="tapa-price-row"><span class="tapa-price">4,80 €</span><span class="allergy-icon">S<span class="tooltip">Contiene soja</span></span></div><div class="tapa-desc">Vainas de soja tiernas al vapor con un toque de sal marina.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-salmon-plancha"></div></div>
+        <div><div class="tapa-name">Salmón a la plancha</div><div class="tapa-price-row"><span class="tapa-price">9,90 €</span><span class="allergy-icon">M<span class="tooltip">Contiene pescado y soja</span></span></div><div class="tapa-desc">Glaseado con salsa teriyaki y servido con un toque de limón fresco.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-sashimi"></div></div>
+        <div><div class="tapa-name">Sashimi de salmón</div><div class="tapa-price-row"><span class="tapa-price">12,95 €</span><span class="allergy-icon">M<span class="tooltip">Contiene pescado crudo</span></span></div><div class="tapa-desc">Finas láminas de salmón fresco de primera calidad.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-gyozas"></div></div>
+        <div><div class="tapa-name">Gyozas de pollo (8u)</div><div class="tapa-price-row"><span class="tapa-price">6,80 €</span><span class="allergy-icon">G<span class="tooltip">Contiene gluten y soja</span></span></div><div class="tapa-desc">Empanadillas japonesas rellenas de pollo, acompañadas de salsa de soja tradicional.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-torta-salmon"></div></div>
+        <div><div class="tapa-name">Torta de salmón y aguacate</div><div class="tapa-price-row"><span class="tapa-price">6,00 €</span><span class="allergy-icon">M<span class="tooltip">Contiene pescado</span></span></div><div class="tapa-desc">Elegante timbal de salmón fresco y aguacate sobre una base de arroz.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-ramen"></div></div>
+        <div><div class="tapa-name">Ramen</div><div class="tapa-price-row"><span class="tapa-price">9,00 €</span><span class="allergy-icon">G<span class="tooltip">Contiene gluten, huevo y soja</span></span></div><div class="tapa-desc">Caldo japonés servido con fideos udon, ternera tierna y huevo cocido.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-arroz-pollo"></div></div>
+        <div><div class="tapa-name">Arroz salteado con pollo</div><div class="tapa-price-row"><span class="tapa-price">6,90 €</span><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></div><div class="tapa-desc">Arroz frito al wok con tiernos trozos de pollo, huevo y zanahoria.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-fideos-gambas"></div></div>
+        <div><div class="tapa-name">Fideos salteados con gambas</div><div class="tapa-price-row"><span class="tapa-price">7,80 €</span><span class="allergy-icon">M<span class="tooltip">Contiene marisco, gluten y huevo</span></span></div><div class="tapa-desc">Fideos al wok con gambas, col crujiente y huevo.</div></div>
+      </div>
+      <div class="tapa-card">
+        <div class="tapa-img"><div class="fi-pollo-curry"></div></div>
+        <div><div class="tapa-name">Pollo con coco y curry rojo</div><div class="tapa-price-row"><span class="tapa-price">7,20 €</span><span class="allergy-icon">?<span class="tooltip">Alérgenos pendientes de confirmar</span></span></div><div class="tapa-desc">Tiras de pollo bañadas en una suave salsa de curry rojo y leche de coco.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galeria">
+  <div style="text-align:center" class="reveal">
+    <div class="eyebrow" style="justify-content:center">Galería</div>
+    <h2>Dentro de <em>La Caseta</em></h2>
+  </div>
+  <div class="gallery-row">
+    <div class="gallery-cell reveal"><div class="g1"></div></div>
+    <div class="gallery-cell reveal"><div class="g2"></div></div>
+    <div class="gallery-cell reveal"><div class="g3"></div></div>
+    <div class="gallery-cell reveal"><div class="g4"></div></div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div style="text-align:center;margin-bottom:3.5rem" class="reveal">
+    <div class="eyebrow" style="justify-content:center">Encuéntranos</div>
+    <h2>Ven a <em>vernos</em></h2>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-rows reveal">
+      <div class="c-row">
+        <div class="c-icon">📍</div>
+        <div><div class="c-label">Dirección</div><div class="c-value">Av. de Catalunya, 27–29<br>Torredembarra, Tarragona</div></div>
+      </div>
+      <div class="c-row">
+        <div class="c-icon">🕐</div>
+        <div><div class="c-label">Horario</div><div class="c-value">De 8:00 a 23:00</div></div>
+      </div>
+      <div class="c-row">
+        <div class="c-icon">📞</div>
+        <div><div class="c-label">Teléfono</div><div class="c-value"><a href="tel:+34641245754">+34 641 24 57 54</a></div></div>
+      </div>
+      <div class="c-row">
+        <div class="c-icon">🌐</div>
+        <div><div class="c-label">Web</div><div class="c-value"><a href="http://www.la-caseta.es" target="_blank">www.la-caseta.es</a></div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="map-box">
+        <div class="map-pin">📍</div>
+        <div class="map-address">Av. de Catalunya, 27–29<br>Torredembarra, Tarragona</div>
+        <a class="map-link" href="https://maps.app.goo.gl/RrpARHdr2dp66xVy9" target="_blank">Abrir en Google Maps →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">La Caseta</div>
+  <p>© 2026 BBQ La Caseta · Torredembarra</p>
+  <ul class="footer-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</footer>
+
+<script is:inline>
+function swap(id,btn){
+  document.querySelectorAll('.menu-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

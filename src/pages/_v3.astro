@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BBQ La Caseta — Variante A (Cream)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --cream:    #F5EDD8;
+  --cream2:   #EDE0C4;
+  --burgundy: #6B1E1E;
+  --burg-dk:  #4A1010;
+  --gold:     #C8960A;
+  --gold-lt:  #E0AA12;
+  --brown:    #2C1810;
+  --muted:    #7A5A40;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--brown);font-family:'Lora',serif;font-weight:400;line-height:1.7;overflow-x:hidden}
+
+/* dotted-line signature motif, reused everywhere */
+.dotted-rule{
+  flex:1;border-bottom:2px dotted var(--gold);
+  margin:0 0.75rem;transform:translateY(-4px);
+  min-width:24px;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 3.5rem;
+  background:rgba(245,237,216,0.92);backdrop-filter:blur(8px);
+  border-bottom:2px solid var(--gold);
+}
+.nav-logo{display:flex;align-items:center;gap:0.6rem;text-decoration:none}
+.logo-b{
+  font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;
+  color:var(--burgundy);line-height:1;
+}
+.logo-stack{line-height:1.1}
+.logo-name{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--burgundy);letter-spacing:0.05em}
+.logo-sub{font-size:0.58rem;color:var(--gold);letter-spacing:0.18em;text-transform:uppercase}
+.nav-links{display:flex;gap:2.25rem;list-style:none}
+.nav-links a{
+  color:var(--brown);text-decoration:none;font-family:'Inter',sans-serif;
+  font-size:0.74rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--burgundy)}
+
+/* ── HERO ── */
+#inicio{
+  min-height:92vh;display:flex;align-items:center;
+  padding:7rem 3.5rem 3rem;position:relative;overflow:hidden;
+}
+.hero-inner{max-width:680px;position:relative;z-index:2}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:0.7rem;
+  font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;
+}
+.hero-eyebrow::before{content:'';width:28px;height:2px;background:var(--gold)}
+
+h1{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(3rem,7vw,5.6rem);line-height:1.0;color:var(--burgundy);
+  margin-bottom:1.4rem;
+}
+h1 em{font-style:italic;color:var(--gold);font-weight:700}
+
+.hero-desc{
+  font-size:1.05rem;color:var(--muted);max-width:420px;margin-bottom:2.2rem;
+}
+
+.btn-primary{
+  display:inline-block;font-family:'Inter',sans-serif;
+  padding:0.9rem 2.1rem;background:var(--burgundy);color:var(--cream);
+  text-decoration:none;font-size:0.76rem;font-weight:600;letter-spacing:0.12em;
+  text-transform:uppercase;border:2px solid var(--burgundy);transition:all 0.2s;
+}
+.btn-primary:hover{background:transparent;color:var(--burgundy)}
+
+/* sketch grill corner decoration - subtle, hero only */
+.sketch-corner{
+  position:absolute;bottom:-2rem;right:-1rem;width:280px;height:280px;
+  opacity:0.12;z-index:1;pointer-events:none;
+}
+
+/* ── SECTION SHARED ── */
+section{padding:5.5rem 3.5rem}
+.section-head{text-align:center;margin-bottom:3rem}
+.eyebrow-center{
+  display:inline-flex;align-items:center;gap:0.7rem;
+  font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.9rem;
+}
+.eyebrow-center::before,.eyebrow-center::after{content:'';width:24px;height:2px;background:var(--gold)}
+
+h2{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:clamp(2rem,4vw,3rem);color:var(--burgundy);line-height:1.12;
+}
+h2 em{font-style:italic;color:var(--gold);font-weight:600}
+
+/* ── BURGUNDY BAND (alternation for contrast) ── */
+.band-burgundy{background:var(--burgundy);color:var(--cream)}
+.band-burgundy h2{color:var(--cream)}
+.band-burgundy .eyebrow-center{color:var(--gold-lt)}
+.band-burgundy .eyebrow-center::before,.band-burgundy .eyebrow-center::after{background:var(--gold-lt)}
+
+/* ── HORARIO STRIP ── */
+#horario{
+  background:var(--burgundy);padding:2.6rem 3.5rem;
+  display:flex;justify-content:center;gap:3.5rem;flex-wrap:wrap;
+}
+.h-item{text-align:center;color:var(--cream)}
+.h-label{font-family:'Inter',sans-serif;font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:0.4rem}
+.h-value{font-family:'Playfair Display',serif;font-size:1.1rem}
+
+/* ── CARTA ── */
+#carta{background:var(--cream)}
+.tabs-row{display:flex;justify-content:center;gap:0;margin-bottom:3.5rem;border:2px solid var(--gold);width:fit-content;margin-left:auto;margin-right:auto}
+.tab-btn{
+  font-family:'Inter',sans-serif;padding:0.65rem 1.5rem;font-size:0.72rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;background:transparent;border:none;
+  border-right:1px solid var(--gold);color:var(--muted);cursor:pointer;transition:all 0.2s;
+}
+.tab-btn:last-child{border-right:none}
+.tab-btn.active{background:var(--burgundy);color:var(--cream)}
+.tab-btn:not(.active):hover{background:rgba(200,150,10,0.1);color:var(--burgundy)}
+
+.menu-panel{display:none}
+.menu-panel.active{display:block}
+
+.pinchos-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 3.5rem;max-width:920px;margin:0 auto}
+.m-row{display:flex;align-items:baseline;padding:0.85rem 0}
+.m-name{font-family:'Lora',serif;font-size:0.98rem;white-space:nowrap}
+.m-price{font-family:'Playfair Display',serif;font-weight:700;color:var(--burgundy);white-space:nowrap}
+
+.tapas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.2rem 3rem;max-width:920px;margin:0 auto}
+.t-card{display:grid;grid-template-columns:80px 1fr;gap:1.1rem}
+.t-img{aspect-ratio:1;border:2px solid var(--gold)}
+.t-img div{width:100%;height:100%}
+.t-name{font-family:'Playfair Display',serif;font-weight:700;color:var(--burgundy);margin-bottom:0.15rem}
+.t-price{font-size:0.82rem;color:var(--gold);font-weight:600;margin-bottom:0.4rem}
+.t-desc{font-size:0.82rem;color:var(--muted)}
+
+.fi1{background:radial-gradient(ellipse at 40% 30%,#C8762A,#5C3010 60%,#1A0E08)}
+.fi2{background:radial-gradient(ellipse at 40% 30%,#4A6A1E,#243A0E 60%,#0A1404)}
+.fi3{background:radial-gradient(ellipse at 40% 30%,#8B4A18,#4A2810 60%,#1A0E08)}
+.fi4{background:radial-gradient(ellipse at 40% 30%,#C4A848,#6A5818 60%,#241E08)}
+.fi5{background:radial-gradient(ellipse at 40% 30%,#C4A040,#6A5418 60%,#241E08)}
+.fi6{background:radial-gradient(ellipse at 40% 30%,#7A7A44,#3A3A1E 60%,#141408)}
+.fi7{background:radial-gradient(ellipse at 40% 30%,#7A4E24,#3A2410 60%,#140C04)}
+.fi8{background:radial-gradient(ellipse at 40% 30%,#B86A28,#5C3210 60%,#1C0E04)}
+
+/* ── GALERÍA ── */
+#galeria{background:var(--cream2)}
+.gallery-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:2rem}
+.g-cell{aspect-ratio:0.9;border:2px solid transparent;overflow:hidden;cursor:pointer;transition:border-color 0.25s}
+.g-cell:hover{border-color:var(--gold)}
+.g-cell div{width:100%;height:100%;transition:transform 0.45s}
+.g-cell:hover div{transform:scale(1.05)}
+.g1{background:radial-gradient(ellipse at 50% 40%,#8B4A18,#3A1E08 60%,#100A04)}
+.g2{background:radial-gradient(ellipse at 50% 40%,#4A5C20,#1E2A0C 60%,#080C04)}
+.g3{background:radial-gradient(ellipse at 50% 40%,#C4822A,#5C3810 60%,#180C04)}
+.g4{background:radial-gradient(ellipse at 50% 40%,#8B6020,#3A2A0C 60%,#100C04)}
+
+/* ── CONTACTO ── */
+#contacto{background:var(--cream)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:980px;margin:0 auto}
+.c-row{display:flex;gap:1.1rem;align-items:flex-start;margin-bottom:1.6rem}
+.c-icon{width:38px;height:38px;min-width:38px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.c-label{font-family:'Inter',sans-serif;font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.3rem}
+.c-value{font-size:0.95rem}
+.c-value a{color:var(--brown);text-decoration:none;border-bottom:1px solid var(--gold)}
+.map-box{
+  border:2px solid var(--gold);aspect-ratio:4/3;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:0.8rem;background:var(--cream2);
+}
+.map-pin{font-size:2rem}
+.map-link{color:var(--burgundy);text-decoration:none;font-family:'Inter',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;border-bottom:2px solid var(--gold)}
+
+/* ── FOOTER (sketch accent lives here) ── */
+footer{
+  background:var(--burg-dk);color:var(--cream);padding:2.2rem 3.5rem 1.4rem;
+  position:relative;overflow:hidden;
+}
+.footer-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
+.footer-logo{font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem}
+.footer-logo em{font-style:italic;color:var(--gold-lt)}
+footer p{font-family:'Inter',sans-serif;font-size:0.7rem;opacity:0.6}
+.footer-links{display:flex;gap:1.4rem;list-style:none}
+.footer-links a{font-family:'Inter',sans-serif;font-size:0.68rem;color:var(--cream);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;opacity:0.75}
+.footer-sketch{position:absolute;bottom:-10px;right:1rem;width:180px;opacity:0.15;z-index:1}
+
+@media (max-width:900px){
+  nav{padding:0.9rem 1.25rem}.nav-links{display:none}
+  section{padding:3.5rem 1.25rem}
+  .pinchos-cols,.tapas-grid{grid-template-columns:1fr}
+  .contact-wrap{grid-template-columns:1fr;gap:2.5rem}
+  .gallery-row{grid-template-columns:1fr 1fr}
+  #horario{gap:1.5rem}
+  .footer-top{flex-direction:column;gap:0.8rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#inicio">
+    <div class="logo-b">B</div>
+    <div class="logo-stack">
+      <div class="logo-name">BQ La Caseta</div>
+      <div class="logo-sub">Bar &amp; Restaurant</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<section id="inicio">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Bar &amp; Restaurant · Torredembarra</div>
+    <h1>La brasa<br>que <em>nunca</em><br>se apaga</h1>
+    <p class="hero-desc">Parrilla de leña, producto fresco y el calor de siempre. Desde el corazón de la Costa Daurada.</p>
+    <a class="btn-primary" href="#carta">Ver la carta</a>
+  </div>
+  <svg class="sketch-corner" viewBox="0 0 200 200" fill="none" stroke="#6B1E1E" stroke-width="2">
+    <ellipse cx="100" cy="140" rx="70" ry="20"/>
+    <line x1="40" y1="140" x2="55" y2="40"/>
+    <line x1="160" y1="140" x2="145" y2="40"/>
+    <line x1="55" y1="40" x2="145" y2="40"/>
+    <line x1="100" y1="40" x2="100" y2="20"/>
+    <circle cx="40" cy="155" r="6"/><circle cx="160" cy="155" r="6"/>
+    <circle cx="40" cy="175" r="6"/><circle cx="160" cy="175" r="6"/>
+  </svg>
+</section>
+
+<div id="horario">
+  <div class="h-item"><div class="h-label">Lunes a viernes</div><div class="h-value">19:00 – 22:30</div></div>
+  <div class="h-item"><div class="h-label">Fines de semana</div><div class="h-value">12:00–16:00 · 19:00–23:00</div></div>
+  <div class="h-item"><div class="h-label">Reservas</div><div class="h-value">+34 641 24 57 54</div></div>
+</div>
+
+<section id="carta">
+  <div class="section-head">
+    <div class="eyebrow-center">La carta</div>
+    <h2>Lo que servimos <em>hoy</em></h2>
+  </div>
+
+  <div class="tabs-row">
+    <button class="tab-btn active" onclick="swap('pinchos',this)">Pinchos a la Parrilla</button>
+    <button class="tab-btn" onclick="swap('tapas',this)">Tapas</button>
+  </div>
+
+  <div id="panel-pinchos" class="menu-panel active">
+    <div class="pinchos-cols">
+      <div>
+        <div class="m-row"><span class="m-name">Calçots (temporada)</span><span class="dotted-rule"></span><span class="m-price">9,95 €</span></div>
+        <div class="m-row"><span class="m-name">Mazorca de maíz</span><span class="dotted-rule"></span><span class="m-price">3,00 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de pimientos</span><span class="dotted-rule"></span><span class="m-price">1,50 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de espárragos</span><span class="dotted-rule"></span><span class="m-price">1,50 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de brócoli</span><span class="dotted-rule"></span><span class="m-price">1,50 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de champiñones</span><span class="dotted-rule"></span><span class="m-price">1,50 €</span></div>
+      </div>
+      <div>
+        <div class="m-row"><span class="m-name">Pincho de alitas</span><span class="dotted-rule"></span><span class="m-price">2,50 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de panceta de cerdo</span><span class="dotted-rule"></span><span class="m-price">2,00 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de ternera</span><span class="dotted-rule"></span><span class="m-price">3,00 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de salchicha de cerdo</span><span class="dotted-rule"></span><span class="m-price">2,00 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de salchicha de pollo</span><span class="dotted-rule"></span><span class="m-price">2,00 €</span></div>
+        <div class="m-row"><span class="m-name">Pincho de gambas</span><span class="dotted-rule"></span><span class="m-price">4,00 €</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panel-tapas" class="menu-panel">
+    <div class="tapas-grid">
+      <div class="t-card"><div class="t-img"><div class="fi1"></div></div><div><div class="t-name">Patatas Bravas</div><div class="t-price">3,60 €</div><div class="t-desc">Dados de patata dorados y crujientes con salsa brava casera.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi2"></div></div><div><div class="t-name">Pimiento Padrón</div><div class="t-price">3,90 €</div><div class="t-desc">Pimientos verdes salteados con un toque de sal gorda.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi3"></div></div><div><div class="t-name">Pincho Moruno</div><div class="t-price">4,80 €</div><div class="t-desc">Dados de carne adobada con especias tradicionales, a la parrilla.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi4"></div></div><div><div class="t-name">Queso Manchego</div><div class="t-price">4,90 €</div><div class="t-desc">Cuñas de auténtico queso manchego curado.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi5"></div></div><div><div class="t-name">Calamares a la Romana</div><div class="t-price">5,00 €</div><div class="t-desc">Anillas de calamar con rebozado ligero y crujiente.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi6"></div></div><div><div class="t-name">Rollo de la Casa (2u)</div><div class="t-price">5,50 €</div><div class="t-desc">Rollitos crujientes rellenos de verduras, con salsa agridulce.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi7"></div></div><div><div class="t-name">Morros</div><div class="t-price">5,50 €</div><div class="t-desc">Trozos de morro de cerdo fritos, dorado y crujiente.</div></div></div>
+      <div class="t-card"><div class="t-img"><div class="fi8"></div></div><div><div class="t-name">Patas de Calamar</div><div class="t-price">5,80 €</div><div class="t-desc">Rejos de calamar fritos con un toque de limón.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="galeria">
+  <div class="section-head">
+    <div class="eyebrow-center">Galería</div>
+    <h2>La Caseta en <em>imágenes</em></h2>
+  </div>
+  <div class="gallery-row">
+    <div class="g-cell"><div class="g1"></div></div>
+    <div class="g-cell"><div class="g2"></div></div>
+    <div class="g-cell"><div class="g3"></div></div>
+    <div class="g-cell"><div class="g4"></div></div>
+  </div>
+</section>
+
+<section id="contacto" class="band-burgundy">
+  <div class="section-head">
+    <div class="eyebrow-center">Encuéntranos</div>
+    <h2>Ven a <em>vernos</em></h2>
+  </div>
+  <div class="contact-wrap">
+    <div>
+      <div class="c-row"><div class="c-icon">📍</div><div><div class="c-label">Dirección</div><div class="c-value">Av. de Catalunya, 27–29<br>Torredembarra, Tarragona</div></div></div>
+      <div class="c-row"><div class="c-icon">🕐</div><div><div class="c-label">Horario</div><div class="c-value">De 8:00 a 23:00</div></div></div>
+      <div class="c-row"><div class="c-icon">📞</div><div><div class="c-label">Teléfono</div><div class="c-value"><a href="tel:+34641245754" style="color:var(--cream);border-color:var(--gold-lt)">+34 641 24 57 54</a></div></div></div>
+    </div>
+    <div class="map-box">
+      <div class="map-pin">📍</div>
+      <a class="map-link" href="https://maps.google.com/?q=Av.+de+Catalunya+27+Torredembarra" target="_blank">Abrir en Google Maps →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">BQ <em>La Caseta</em></div>
+    <p>© 2026 BBQ La Caseta · Torredembarra</p>
+    <ul class="footer-links"><li><a href="#inicio">Inicio</a></li><li><a href="#carta">Carta</a></li></ul>
+  </div>
+  <svg class="footer-sketch" viewBox="0 0 200 100" fill="none" stroke="#C8960A" stroke-width="2">
+    <line x1="20" y1="60" x2="180" y2="60"/>
+    <line x1="40" y1="60" x2="40" y2="20"/><line x1="60" y1="60" x2="60" y2="15"/>
+    <line x1="100" y1="60" x2="100" y2="25"/><line x1="140" y1="60" x2="140" y2="18"/>
+  </svg>
+</footer>
+
+<script is:inline>
+function swap(id,btn){
+  document.querySelectorAll('.menu-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
